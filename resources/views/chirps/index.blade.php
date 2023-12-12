@@ -38,7 +38,7 @@
                             <div class="flex justify-between items-center">
                                 <div>
                                     <span class="text-gray-800 dark:text-gray-200">
-
+                                        {{ $chirp->user->name }}
                                     </span>
                                     <small class="ml-2 text-sm text-gray-600 dark:text-gray-400">{{ $chirp->created_at->format('j M Y, g:i a') }}</small>
                                     @unless($chirp->created_at->eq($chirp->updated_at))
@@ -49,8 +49,9 @@
                             </div>
                             <p class="mt-4 text-lg text-gray-900 dark:text-gray-100">{{ $chirp->message }}</p>
                         </div>
-
-
+                        <a href="{{route('chirps.edit', $chirp)}}">
+                            {{ __('Edit Chirp') }}
+                        </a>
                     </div>
                 @endforeach
             </div>

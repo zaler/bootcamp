@@ -3,9 +3,13 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChirpController;
+use Illuminate\Support\Facades\DB;
+
+/*DB::listen(function ($query) {
+    dump($query->sql, $query->bindings, $query->time); // dump($query))
+});*/
 
 Route::view('/', 'welcome')->name('Welcome');
-
 
 Route::middleware('auth')->group(function () {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
@@ -18,6 +22,15 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/chirps', [ChirpController::class, 'store'])
     ->name('chirps.store');
+
+    Route::get('/chirps/{chirp}/editar', [ChirpController::class, 'edit'])
+        ->name('chirps.edit');
+
+    Route::put('/chirps/{chirp}', [ChirpController::class, 'update'])
+        ->name('chirps.update');
+
+    Route::delete('/chirps/{chirp}', [ChirpController::class, 'destroy'])
+        ->name('chirps.destroy');
 });
 
 require __DIR__.'/auth.php';
