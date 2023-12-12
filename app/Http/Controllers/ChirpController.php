@@ -56,9 +56,10 @@ class ChirpController extends Controller
     {
        //$chirp = Chirp::findOrFail($chirp->id);
        $chirp=Chirp::with('user')->findOrFail($chirp->id);
-       return view('chirps.edit', [
+
+        return view('chirps.edit', [
            'chirp' => $chirp,
-       ]);
+        ]);
 
     }
 
